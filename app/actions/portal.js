@@ -219,7 +219,7 @@ export async function getProjectLinks(email) {
     if (!userId) return { success: false, message: 'User not found' };
 
     const projects = await query(
-      'SELECT name, github_url, hosted_url, progress, updated_at FROM projects WHERE user_id = ? ORDER BY updated_at DESC',
+      'SELECT id, name, github_url, hosted_url, progress, updated_at FROM projects WHERE user_id = ? ORDER BY updated_at DESC',
       [userId]
     );
 
