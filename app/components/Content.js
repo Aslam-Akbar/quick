@@ -63,12 +63,6 @@ const Content = () => {
                 >
                   Start Your Project
                 </Link>
-                {/* <Link 
-                  href="#work" 
-                  className="w-full sm:w-auto bg-transparent border border-slate-700 text-white hover:bg-white/5 px-8 py-4 rounded-xl font-bold text-lg transition-all"
-                >
-                  View Case Studies
-                </Link> */}
               </div>
             </div>
             
