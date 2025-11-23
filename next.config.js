@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Clean configuration for Vercel deployment
+  experimental: {
+    optimizePackageImports: [],
+  },
+  reactStrictMode: true,
 };
 
 module.exports = nextConfig;
