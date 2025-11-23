@@ -1,0 +1,165 @@
+# Quick Tech Solutions - Agency Website
+
+## Overview
+This is a Next.js web application for Quick Tech Solutions, a premium software development agency. The application serves as both a marketing website and a client portal.
+
+**Project Type**: Next.js Frontend Application  
+**Tech Stack**: Next.js 16, React 19, Tailwind CSS, MySQL (TiDB Cloud)  
+**Last Updated**: November 22, 2025
+
+## Purpose
+- Showcase agency services (software development, mobile apps, cloud infrastructure, etc.)
+- Provide company information and career opportunities
+- Client portal for project management, invoices, and support tickets
+- Admin dashboard for managing clients, projects, and job postings
+
+## Project Architecture
+
+### Directory Structure
+- `/app` - Next.js app directory (all source code)
+  - `/actions` - Server actions for data operations
+  - `/components` - React components
+  - `/lib` - Database connection utilities
+  - `/data` - Mock data for development
+  - `/utils` - Utility functions
+  - `/admin` - Admin dashboard (protected and public routes)
+  - `/client-portal` - Client dashboard
+  - `/careers`, `/about`, `/contact`, etc. - Public pages
+- `/public` - Static assets
+- `/scripts` - Database setup and utility scripts
+
+### Key Features
+1. **Public Website**: Services, About, Contact, Careers pages
+2. **Client Portal**: Login-protected dashboard with:
+   - Project tracking with timelines
+   - Invoice management
+   - Asset downloads
+   - Support ticket system
+   - Profile settings
+3. **Admin Dashboard**: 
+   - Client management
+   - Job posting management
+   - Dashboard statistics
+   - Protected routes with authentication
+
+### Database
+- **Type**: MySQL (TiDB Cloud hosted)
+- **Connection**: Via mysql2 pool in `app/lib/db.js`
+- **Tables**: users, client_profiles, projects, invoices, tickets, meetings, job_postings, admin_users
+- **Setup Script**: `scripts/setup-dashboard-db.js` (creates schema and seeds data)
+
+## Development Setup
+
+### Running the Application
+```bash
+npm run dev
+```
+The application runs on http://0.0.0.0:5000 (configured for Replit environment)
+
+### Environment Configuration
+- **Port**: 5000 (required for Replit webview)
+- **Host**: 0.0.0.0 (allows all hosts for Replit proxy)
+- **Next.js Config**: Configured with `allowedDevOrigins: ['*']` for Replit compatibility
+
+### Database Setup
+The application connects to a pre-configured TiDB Cloud MySQL database. Connection details are in `app/lib/db.js`.
+
+## Recent Changes
+
+### November 22, 2025 - Complete Project Structure Migration
+- **src to app Directory Consolidation**:
+  - Migrated all shared folders (actions, components, data, lib, utils) from `src/` to `app/`
+  - Recovered deleted component files from git history (Content.js, About.js, Services.js, etc.)
+  - Fixed all import paths across the entire codebase to reflect new structure
+  - Admin routes now use correct relative path depths based on nesting level:
+    - 2 levels (layout/dashboard): `../../actions/`
+    - 3 levels (clients/careers list): `../../../actions/`
+    - 4 levels (clients/[id], careers/new): `../../../../actions/`
+  - Updated scripts folder to reference `../app/*` modules
+  - Verified production-ready: all routes compile and run without errors
+  - Eliminated confusion from dual directory structures (old CRA src + Next.js app)
+
+### November 21, 2025 - UI/UX Enhancements
+- **Home Page Hero Text**:
+  - Applied gradient colors to all three hero words for visual impact
+  - "Engineering" - cyan to blue gradient (from-cyan-400 to-blue-500)
+  - "Digital" - blue gradient (from-blue-400 to-blue-600)
+  - "Dominance" - violet to purple gradient (from-violet-400 to-purple-600)
+
+- **Client Portal Views - Complete Tailwind Migration**:
+  - Converted all 5 sub-views from custom CSS to Tailwind CSS
+  - Projects View: Grid layout with project cards, status badges, progress bars
+  - Invoices View: Table layout with payment status indicators
+  - Assets View: Grid of downloadable files with icons and metadata
+  - Support View: Ticket list with status badges and priority indicators
+  - Settings View: Profile form with consistent input styling
+  - All views now use consistent dark theme (slate-900/50) with blue accents
+
+- **Admin Dashboard Improvements**:
+  - Fixed Modal component overflow with max-h-[90vh] and scrollable content area
+  - Added delete functionality to Careers page with dropdown menu (MoreVertical icon)
+  - Styled "Post New Job" form with Tailwind CSS, removed all inline styles
+  - Delete confirmation dialog before removing job postings
+  - Consistent button and input styling across all admin forms
+
+### November 21, 2025 - Page Styling Fixes
+- **Fixed Unstyled Pages**:
+  - Converted Privacy, Terms, Cookies, and Support pages from missing CSS files to Tailwind CSS
+  - Removed broken CSS imports (`./assets/css/style.css`, `./assets/css/pages.css`)
+  - Added Header and Footer components to all legal and support pages
+  - Applied consistent dark theme (slate-900) with blue accents matching the rest of the site
+  - All pages now properly styled and functional with no build errors
+
+- **Import Migration Completed**:
+  - Installed npm dependencies (removed react-helmet-async due to React 19 incompatibility)
+  - Restarted workflow successfully
+  - Verified all pages load and display correctly
+  - Client Portal and Admin pages confirmed to have proper styling
+
+### November 21, 2025 - Full Project Review & Fixes
+- **Code Quality Improvements**:
+  - Fixed duplicate console.error logging in src/lib/db.js
+  - Removed legacy build directory from CRA migration
+  - Verified all database connections working correctly
+  
+- **Testing & Validation**:
+  - Tested all public pages (Home, Services, About, Careers, Contact, Process)
+  - Verified client login functionality
+  - Verified admin login functionality
+  - Confirmed database connectivity and queries
+  - All features working as expected
+
+- **Documentation**:
+  - Created comprehensive TESTING_GUIDE.md with test credentials
+  - Updated README.md with full feature documentation
+  - Added security notes and production recommendations
+  - Documented all database tables and schema
+
+- **Initial Replit Setup**:
+  - Configured Next.js to run on port 5000 with host 0.0.0.0
+  - Added `allowedDevOrigins: ['*']` to next.config.js for Replit proxy
+  - Created .gitignore for Next.js project
+  - Set up workflow for frontend development
+  - Installed dependencies with --legacy-peer-deps flag
+  - Configured deployment for autoscale
+
+## Test Credentials
+
+### Client Portal
+- Email: `test@example.com`
+- Password: `password123`
+- URL: `/login`
+
+### Admin Dashboard
+- Email: `admin@quicks.com`
+- Password: `admin123`
+- URL: `/admin/login`
+
+## User Preferences
+None documented yet.
+
+## Known Issues
+- Minor hydration warnings on login/contact pages (non-critical, doesn't affect functionality)
+- Using --legacy-peer-deps for installation due to react-helmet-async peer dependency conflict with React 19
+- Security: Passwords stored in plain text (demo only - requires hashing for production)
+- Security: Database credentials hardcoded (should use environment variables in production)
