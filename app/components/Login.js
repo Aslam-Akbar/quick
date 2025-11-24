@@ -51,6 +51,14 @@ const Login = () => {
             <p className="text-slate-400">Access your project dashboard</p>
           </div>
 
+          <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 mb-6">
+            <h3 className="text-blue-400 font-semibold text-sm mb-2">Try the Demo</h3>
+            <div className="text-sm text-slate-300 space-y-1">
+              <p><span className="text-slate-500">Email:</span> <span className="text-white font-mono select-all">test@gmail.com</span></p>
+              <p><span className="text-slate-500">Password:</span> <span className="text-white font-mono select-all">test123</span></p>
+            </div>
+          </div>
+
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2 flex items-center gap-2">
