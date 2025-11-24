@@ -38,11 +38,11 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-900 p-6">
-      <div className="w-full max-w-5xl bg-slate-800/50 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col lg:flex-row">
+    <div className="min-h-screen t-10 flex items-center justify-center bg-slate-900 p-6">
+      <div className="w-full mt-14 max-w-5xl bg-slate-800/50 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col lg:flex-row">
         
         {/* Login Form Section */}
-        <div className="flex-1 p-8 lg:p-12">
+        <div className="flex-1 p-8  lg:p-12">
           <div className="text-center mb-10">
             <div className="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center text-blue-500 text-2xl mx-auto mb-4 border border-blue-500/20">
               <FaUser />
