@@ -20,7 +20,9 @@ import {
   Bell,
   Globe,
   Github,
-  Briefcase
+  Briefcase,
+  Menu,
+  X
 } from 'lucide-react';
 // import '../assets/css/dashboard.css'; // Removed
 // import '../assets/css/portal-views.css'; // Removed - assuming we will fix sub-views later or they inherit
@@ -40,6 +42,7 @@ const ClientDashboard = ({ userEmail }) => {
   const [error, setError] = useState(null);
   const [activeView, setActiveView] = useState('dashboard');
   const [openNewTicket, setOpenNewTicket] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleNewRequest = () => {
     setActiveView('support');
@@ -97,14 +100,36 @@ const ClientDashboard = ({ userEmail }) => {
 
   return (
     <div className="flex min-h-screen bg-slate-900 text-slate-50 font-sans">
+      {/* Mobile Header */}
+      <div className="md:hidden fixed top-0 left-0 w-full bg-slate-900/95 backdrop-blur-xl border-b border-white/10 z-50 px-6 py-4 flex items-center justify-between">
+        <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">
+          Quick<span className="text-blue-500">Portal</span>
+        </h2>
+        <button 
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          className="text-slate-400 hover:text-white transition-colors"
+        >
+          {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {/* Sidebar Overlay */}
+      {isSidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 md:hidden backdrop-blur-sm"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-[280px] bg-slate-900/95 backdrop-blur-xl border-r border-white/10 flex flex-col p-6 fixed h-full left-0 top-0 z-50 transition-transform">
-        <div className="pb-8 mb-4 border-b border-white/10">
+      <aside className={`w-[280px] bg-slate-900/95 backdrop-blur-xl border-r border-white/10 flex flex-col p-6 fixed h-full left-0 top-0 z-50 transition-transform duration-300 ease-in-out
+        ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}>
+        <div className="pb-8 mb-4 border-b border-white/10 hidden md:block">
           <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">
             Quick<span className="text-blue-500">Portal</span>
           </h2>
         </div>
-        <nav className="flex flex-col gap-2 flex-1 overflow-y-auto">
+        <nav className="flex flex-col gap-2 flex-1 overflow-y-auto mt-16 md:mt-0">
           {[
             { id: 'dashboard', icon: LayoutDashboard, label: 'Overview' },
             { id: 'projects', icon: FolderKanban, label: 'My Projects' },
@@ -121,7 +146,10 @@ const ClientDashboard = ({ userEmail }) => {
                   ? 'bg-gradient-to-r from-blue-500/10 to-transparent text-blue-500 border-l-4 border-blue-500 rounded-r-xl' 
                   : 'text-slate-400 hover:bg-white/5 hover:text-white hover:translate-x-1 border-l-4 border-transparent'
                 }`}
-              onClick={() => setActiveView(item.id)}
+              onClick={() => {
+                setActiveView(item.id);
+                setIsSidebarOpen(false);
+              }}
             >
               <item.icon size={20} className={activeView === item.id ? 'drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]' : ''} />
               <span>{item.label}</span>
@@ -142,13 +170,13 @@ const ClientDashboard = ({ userEmail }) => {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 ml-[280px] p-10 max-w-[1600px]">
+      <main className="flex-1 md:ml-[280px] p-4 md:p-10 max-w-[1600px] mt-16 md:mt-0 w-full overflow-x-hidden">
         <header className="flex justify-between items-center mb-12">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-300">
+          <div className="flex-1">
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-300">
               Welcome back, {data.clientInfo.contact.split(' ')[0]}
             </h1>
-            <p className="text-slate-400 mt-2">
+            <p className="text-slate-400 mt-2 text-sm md:text-base">
               Here's what's happening with your projects today.
             </p>
           </div>

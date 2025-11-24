@@ -34,7 +34,7 @@ const Header = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-8">
           <ul className="flex items-center gap-8">
             <li><Link href="/" className="text-slate-300 hover:text-white font-medium transition-colors">Home</Link></li>
             <li><Link href="/services" className="text-slate-300 hover:text-white font-medium transition-colors">Services</Link></li>
@@ -46,7 +46,7 @@ const Header = () => {
         </div>
 
         {/* Desktop Actions */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-4">
           <Link href="/login" className="text-slate-300 hover:text-white font-medium transition-colors">Client Login</Link>
           <Link 
             href="/contact" 
@@ -59,7 +59,7 @@ const Header = () => {
         {/* Mobile Toggle */}
         <button 
           type="button"
-          className="md:hidden text-white p-2 focus:outline-none"
+          className="lg:hidden text-white p-2 focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle navigation menu"
           aria-expanded={isOpen}
@@ -69,7 +69,7 @@ const Header = () => {
 
         {/* Mobile Menu */}
         <div 
-          className={`absolute top-full left-0 w-full bg-slate-900 border-t border-white/10 shadow-xl transition-all duration-300 overflow-hidden md:hidden ${
+          className={`absolute top-full left-0 w-full bg-slate-900 border-t border-white/10 shadow-xl transition-all duration-300 overflow-hidden lg:hidden ${
             isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
           }`}
         >
