@@ -103,6 +103,9 @@ export async function getTickets(email) {
 
 export async function createTicket(email, ticket) {
   try {
+    if (email === 'test@gmail.com') {
+      return { success: false, message: 'This action is disabled for the demo account.' };
+    }
     const userId = await getUserId(email);
     if (!userId) return { success: false, message: 'User not found' };
 
@@ -138,6 +141,9 @@ export async function getTicketDetails(email, ticketId) {
 
 export async function replyToTicket(email, ticketId, message) {
   try {
+    if (email === 'test@gmail.com') {
+      return { success: false, message: 'This action is disabled for the demo account.' };
+    }
     const userId = await getUserId(email);
     if (!userId) return { success: false, message: 'User not found' };
 
@@ -161,6 +167,9 @@ export async function replyToTicket(email, ticketId, message) {
 
 export async function updateProfile(email, data) {
   try {
+    if (email === 'test@gmail.com') {
+      return { success: false, message: 'This action is disabled for the demo account.' };
+    }
     const userId = await getUserId(email);
     if (!userId) return { success: false, message: 'User not found' };
 
@@ -177,6 +186,9 @@ export async function updateProfile(email, data) {
 
 export async function changePassword(email, currentPassword, newPassword) {
   try {
+    if (email === 'test@gmail.com') {
+      return { success: false, message: 'This action is disabled for the demo account.' };
+    }
     const userId = await getUserId(email);
     if (!userId) return { success: false, message: 'User not found' };
 
@@ -200,6 +212,9 @@ export async function changePassword(email, currentPassword, newPassword) {
 
 export async function updateNotificationPreferences(email, preferences) {
   try {
+    if (email === 'test@gmail.com') {
+      return { success: false, message: 'This action is disabled for the demo account.' };
+    }
     const userId = await getUserId(email);
     if (!userId) return { success: false, message: 'User not found' };
 
